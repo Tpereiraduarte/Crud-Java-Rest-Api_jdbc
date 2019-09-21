@@ -1,0 +1,45 @@
+package com.example;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+public class PessoaService {
+	   private List<Pessoa> pessoas = new ArrayList<Pessoa>();
+	   private DBConnection conn = new DBConnection();
+	    public List<Pessoa> listPessoas() throws SQLException {
+	    	conn.getConnection();
+
+	    	String sql = "SELECT * FROM Pessoas";
+	    	 
+	    	Statement statement = conn.getConnection().createStatement();
+	    	ResultSet result = statement.executeQuery(sql);
+	    	 
+	    	int count = 0;
+	    	 
+	    	while (result.next()){
+	    	    long id = result.getLong(1);
+	    	    System.out.println(id);
+	    		String nome = result.getString(2);
+	    	    String sobrenome = result.getString(3);
+	    	    int idade = result.getInt(4);
+	    	 
+	    	    String output = "Pessoa #%d: %s - %s  - %d";
+	    	}
+	      return pessoas;
+	    }
+	    
+	    public void create(Pessoa pessoa) throws SQLException {
+	    	conn.getConnection();
+	    	 String query = " insert into pessoas (nome, sobrenome, idade)"
+	    		        + " values (?, ?, ?)";
+	    		      PreparedStatement preparedStmt = conn.getConnection().prepareStatement(query);
+	    		      preparedStmt.setString (1, pessoa.getNome());
+	    		      preparedStmt.setString (2, pessoa.getSobrenome());
+	    		      preparedStmt.setInt    (3, pessoa.getIdade());
+	    		      preparedStmt.execute();
+	    }
+	}

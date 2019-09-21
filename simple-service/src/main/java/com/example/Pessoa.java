@@ -1,22 +1,22 @@
 package com.example;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
+
 
 @XmlRootElement
 public class Pessoa {
+	private long id;
 	private String nome;
 	private String sobrenome;
 	private int idade;
 	
-	
-	public Pessoa(String nome, String sobrenome, int idade) {
-		super();
-		this.nome = nome;
-		this.sobrenome = sobrenome;
-		this.idade = idade;
+	public long getId() {
+		return id;
 	}
-	
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public String getNome() {
 		return nome;
 	}

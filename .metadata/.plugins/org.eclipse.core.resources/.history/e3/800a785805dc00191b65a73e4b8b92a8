@@ -1,0 +1,31 @@
+package com.example;
+
+import java.util.List;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import java.util.ArrayList;
+
+@Path("lista")
+public class ListaPessoa {
+
+	@GET	
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Pessoa> getPessoa() {
+
+		List<Pessoa> usuarios = new ArrayList<>();
+		
+		/*usuarios.add(new Pessoa(1,"Thiago","Pereira",30));
+		usuarios.add(new Pessoa(2,"João","Fulano",20));
+		usuarios.add(new Pessoa(3,"Thais","Baltazar",33));
+		usuarios.add(new Pessoa(4,"Maria","Duarte",35));
+		usuarios.add(new Pessoa(5,"Marcio","Roberto",37));
+		usuarios.add(new Pessoa(6,"Ana","maria",40));
+		usuarios.add(new Pessoa(7,"Gullar","Peixoto",20));
+		usuarios.add(new Pessoa(8,"Jennifer","Parreira",40));*/
+		return usuarios;	
+	}
+
+}

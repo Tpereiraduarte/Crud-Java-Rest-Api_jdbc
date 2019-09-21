@@ -1,0 +1,67 @@
+package com.example;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+public class PessoaService {
+
+	private DBConnection conn = new DBConnection();
+
+	public List<Pessoa> listPessoas() throws SQLException {
+		String sql = "SELECT * FROM pessoas";
+		List<Pessoa> pessoas = new ArrayList<Pessoa>();
+
+		Statement statement = conn.getConnection().createStatement();
+		ResultSet result = statement.executeQuery(sql);
+
+		int count = 0;
+
+		while (result.next()){
+			Pessoa pessoa = new Pessoa();
+
+			pessoa.setId(result.getLong("id"));
+			pessoa.setNome(result.getString("nome"));
+			pessoa.setSobrenome(result.getString("sobrenome"));
+			pessoa.setIdade(result.getInt("idade"));
+
+			pessoas.add(pessoa);
+		}
+		return pessoas;
+	}
+
+	public void create(Pessoa pessoa) throws SQLException {
+		conn.getConnection();
+		String query = " insert into pessoas (nome, sobrenome, idade)"
+				+ " values (?, ?, ?)";
+		PreparedStatement preparedStmt = conn.getConnection().prepareStatement(query);
+		preparedStmt.setString (1, pessoa.getNome());
+		preparedStmt.setString (2, pessoa.getSobrenome());
+		preparedStmt.setInt    (3, pessoa.getIdade());
+		preparedStmt.execute();
+	}
+
+	public void delete(long id) throws SQLException {
+		String query = "delete pessoas where id = ?";
+		PreparedStatement preparedStmt = conn.getConnection().prepareStatement(query);
+		preparedStmt.execute();
+	}
+
+	public void getPessoa(long id) throws SQLException {
+		String query = "UPDATE pessoas SET nome = ?, sobrenome = ?, idade = ?" + " WHERE id = ?";
+		Statement statement = conn.getConnection().createStatement();
+		PreparedStatement preparedStmt = conn.getConnection().prepareStatement(query);	Pessoa pessoa = new Pessoa();
+		preparedStmt.setString(1, pessoa.getNome());
+		preparedStmt.setString(2, pessoa.getSobrenome());
+		preparedStmt.setInt(3, pessoa.getIdade());
+		preparedStmt.execute();
+	}
+
+	public void update(long id) {
+
+	}
+
+}
